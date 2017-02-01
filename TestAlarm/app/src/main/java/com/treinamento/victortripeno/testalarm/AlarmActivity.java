@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -115,6 +116,7 @@ public class AlarmActivity extends AppCompatActivity {
                 NotificationCompat.Builder mBuilder =
                         new NotificationCompat.Builder(AlarmActivity.this)
                                 .setSmallIcon(R.mipmap.ic_launcher)
+                                .setColor(ContextCompat.getColor(AlarmActivity.this.getApplicationContext(), R.color.colorPrimaryDark))
                                 .setContentTitle("My notification")
                                 .setContentText("Hello World!")
                                 .setPriority(Notification.PRIORITY_HIGH)
