@@ -123,7 +123,7 @@ public class AlarmActivity extends AppCompatActivity {
                                 .setDefaults(Notification.DEFAULT_ALL);
                 NotificationManager mNotifyMgr =
                         (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-                int mNotificationId = 001;
+                int mNotificationId = 001; // ID precisa ser alterado para que apareça mais de uma notificação 
                 mNotifyMgr.notify(mNotificationId, mBuilder.build());
 
             }
