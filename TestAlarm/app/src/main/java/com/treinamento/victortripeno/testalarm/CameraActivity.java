@@ -41,8 +41,8 @@ public class CameraActivity extends AppCompatActivity implements SurfaceHolder.C
         controlInflater = LayoutInflater.from(getBaseContext());
         View viewControl = controlInflater.inflate(R.layout.control, null);
         LayoutParams layoutParamsControl
-                = new LayoutParams(LayoutParams.FILL_PARENT,
-                LayoutParams.FILL_PARENT);
+                = new LayoutParams(LayoutParams.MATCH_PARENT,
+                LayoutParams.MATCH_PARENT);
         this.addContentView(viewControl, layoutParamsControl);
 
         btnTakePicture = (Button) findViewById(R.id.takepicture);
