@@ -41,6 +41,7 @@ public class AlarmActivity extends AppCompatActivity {
     private ListView listaHorarios;
     private Button btnDelete;
     private Button btnMensagem;
+    private Button btnCamera;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -85,6 +86,7 @@ public class AlarmActivity extends AppCompatActivity {
         listaHorarios = (ListView) findViewById(R.id.lista_horario);
         btnDelete = (Button) findViewById(R.id.deletar_horario);
         btnMensagem = (Button) findViewById(R.id.btn_mensagem);
+        btnCamera = (Button) findViewById(R.id.btn_camera);
 
 
         // ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -123,9 +125,18 @@ public class AlarmActivity extends AppCompatActivity {
                                 .setDefaults(Notification.DEFAULT_ALL);
                 NotificationManager mNotifyMgr =
                         (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-                int mNotificationId = 001; // ID precisa ser alterado para que apareça mais de uma notificação 
+                int mNotificationId = 001; // ID precisa ser alterado para que apareça mais de uma notificação
                 mNotifyMgr.notify(mNotificationId, mBuilder.build());
 
+            }
+        });
+
+        btnCamera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(AlarmActivity.this, CameraActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                AlarmActivity.this.startActivity(intent);
             }
         });
 
