@@ -25,6 +25,7 @@ import com.treinamento.victortripeno.testalarm.adapter.AlarmAdapter;
 import com.treinamento.victortripeno.testalarm.dao.AlarmDAO;
 import com.treinamento.victortripeno.testalarm.modelo.Alarme;
 import com.treinamento.victortripeno.testalarm.receiver.AlarmReceiver;
+import com.treinamento.victortripeno.testalarm.service.ServicoAlarme;
 
 import java.text.ParseException;
 import java.util.Calendar;
@@ -47,6 +48,7 @@ public class AlarmActivity extends AppCompatActivity {
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
     private GoogleApiClient client;
+    private Intent msgIntent;
 
     public static AlarmActivity instance() {
         return inst;
@@ -88,6 +90,11 @@ public class AlarmActivity extends AppCompatActivity {
         btnMensagem = (Button) findViewById(R.id.btn_mensagem);
         btnCamera = (Button) findViewById(R.id.btn_camera);
 
+
+        msgIntent = new Intent(this, ServicoAlarme.class);
+        msgIntent.putExtra(ServicoAlarme.ALARM_SERVICE, "TESTE");
+
+        startService(msgIntent);
 
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
