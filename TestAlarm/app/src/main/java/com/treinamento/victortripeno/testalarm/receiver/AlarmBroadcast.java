@@ -43,7 +43,7 @@ public class AlarmBroadcast extends BroadcastReceiver {
         }
         if(flgAlm) {
             Toast.makeText(context, "TESTE " + alm.toString(), Toast.LENGTH_LONG).show();
-            Log.d("TESTE Intent", "TESTE Intent Broadcast");
+            Log.d("TESTE Intent", "TESTE Intent Broadcast "  + alm.toString());
         }
 
     }
