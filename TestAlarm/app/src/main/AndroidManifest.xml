@@ -18,25 +18,26 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CameraActivity">
-        </activity>
+        <activity android:name=".CameraActivity"></activity>
 
         <service
             android:name=".service.AlarmService"
             android:enabled="true" />
-
         <service
             android:name=".service.ServicoAlarme"
             android:enabled="true" />
 
         <receiver android:name=".receiver.AlarmReceiver" />
-        <receiver android:name=".receiver.AlarmBroadcast"
+        <receiver
+            android:name=".receiver.AlarmBroadcast"
             android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
-            <intent-filter >
-                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name=".service.AlarmService" />
             </intent-filter>
         </receiver>
+
+        <activity android:name=".DesenhoActivity"></activity>
     </application>
 
 </manifest>

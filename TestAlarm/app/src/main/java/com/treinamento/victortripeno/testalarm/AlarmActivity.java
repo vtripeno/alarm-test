@@ -40,9 +40,9 @@ public class AlarmActivity extends AppCompatActivity {
     private TextView alarmTextView;
     private Button btnAdicionar;
     private ListView listaHorarios;
-    private Button btnDelete;
     private Button btnMensagem;
     private Button btnCamera;
+    private Button btnDesenho;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -86,9 +86,9 @@ public class AlarmActivity extends AppCompatActivity {
         alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         btnAdicionar = (Button) findViewById(R.id.novo_horario);
         listaHorarios = (ListView) findViewById(R.id.lista_horario);
-        btnDelete = (Button) findViewById(R.id.deletar_horario);
         btnMensagem = (Button) findViewById(R.id.btn_mensagem);
         btnCamera = (Button) findViewById(R.id.btn_camera);
+        btnDesenho = (Button) findViewById(R.id.btn_desenho);
 
 
         msgIntent = new Intent(this, ServicoAlarme.class);
@@ -142,6 +142,15 @@ public class AlarmActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(AlarmActivity.this, CameraActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                AlarmActivity.this.startActivity(intent);
+            }
+        });
+
+        btnDesenho.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(AlarmActivity.this, DesenhoActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 AlarmActivity.this.startActivity(intent);
             }
