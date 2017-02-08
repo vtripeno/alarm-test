@@ -9,9 +9,12 @@ import android.widget.Toast;
 
 import com.treinamento.victortripeno.testalarm.dao.AlarmDAO;
 import com.treinamento.victortripeno.testalarm.modelo.Alarme;
+import com.treinamento.victortripeno.testalarm.service.ServicoAlarme;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 /**
  * Created by victor.tripeno on 03/02/2017.
@@ -29,22 +32,36 @@ public class AlarmBroadcast extends BroadcastReceiver {
         alm = new Alarme();
         dao = new AlarmDAO(context);
         boolean flgAlm = false;
+        List<Alarme> alarmes = new ArrayList<Alarme>();
+
         try {
-            for (Alarme alarme : dao.buscarAlarmes()) {
-                if(alarme.getTempo().getTime().getHours() == calendar.getTime().getHours() &&
+            alarmes = dao.buscarAlarmes();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        if (alarmes.size() > 0) {
+            for (Alarme alarme : alarmes) {
+                if (alarme.getTempo().getTime().getHours() == calendar.getTime().getHours() &&
                         alarme.getTempo().getTime().getMinutes() == calendar.getTime().getMinutes()) {
                     alm = alarme;
                     flgAlm = true;
                     break;
                 }
             }
-        } catch (ParseException e) {
-            e.printStackTrace();
+
+            if(flgAlm) {
+                Toast.makeText(context, "TESTE " + alm.toString(), Toast.LENGTH_LONG).show();
+                Log.d("TESTE Intent", "TESTE Intent Broadcast "  + alm.toString());
+            }
+        } else {
+            Intent serviceIntent = new Intent(context, ServicoAlarme.class);
+            context.stopService(serviceIntent);
+            Toast.makeText(context, "PAROU SERVIÇO", Toast.LENGTH_LONG).show();
+            Log.d("TESTE Intent", "PAROU SERVIÇO");
         }
-        if(flgAlm) {
-            Toast.makeText(context, "TESTE " + alm.toString(), Toast.LENGTH_LONG).show();
-            Log.d("TESTE Intent", "TESTE Intent Broadcast "  + alm.toString());
-        }
+
+
 
     }
 
