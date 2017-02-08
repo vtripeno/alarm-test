@@ -1,20 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fillViewport="true">
 
-    <Button
-        android:id="@+id/deletar_horario"
-        android:layout_width="50dp"
-        android:layout_height="30dp"
-        android:text="-"
-        android:textColor="#ffffff"
-        android:textSize="25sp"
-        android:background="@color/common_signin_btn_default_background"/>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/horario_estabelecido"/>
-</LinearLayout>
+        <Button
+            android:id="@+id/deletar_horario"
+            android:layout_width="50dp"
+            android:layout_height="30dp"
+            android:text="-"
+            android:textColor="#ffffff"
+            android:textSize="25sp"
+            android:background="@color/common_signin_btn_default_background"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/horario_estabelecido"/>
+    </LinearLayout>
+</ScrollView>
