@@ -48,4 +48,8 @@ public class ServicoAlarme extends IntentService {
                 pendingIntent);
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+    }
 }

@@ -57,8 +57,6 @@ public class AlarmBroadcast extends BroadcastReceiver {
         } else {
             Intent serviceIntent = new Intent(context, ServicoAlarme.class);
             context.stopService(serviceIntent);
-            Toast.makeText(context, "PAROU SERVIÇO", Toast.LENGTH_LONG).show();
-            Log.d("TESTE Intent", "PAROU SERVIÇO");
         }
 
 
