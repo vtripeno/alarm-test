@@ -2,14 +2,15 @@ package com.treinamento.victortripeno.testalarm.receiver;
 
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.treinamento.victortripeno.testalarm.dao.AlarmDAO;
 import com.treinamento.victortripeno.testalarm.modelo.Alarme;
-import com.treinamento.victortripeno.testalarm.service.ServicoAlarme;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -55,12 +56,18 @@ public class AlarmBroadcast extends BroadcastReceiver {
                 Log.d("TESTE Intent", "TESTE Intent Broadcast "  + alm.toString());
             }
         } else {
-            Intent serviceIntent = new Intent(context, ServicoAlarme.class);
-            context.stopService(serviceIntent);
+            Toast.makeText(context, "PAROU SERVIÇO", Toast.LENGTH_LONG).show();
+            Log.d("TESTE Intent", "PAROU SERVIÇO");
+
+            ComponentName receiver = new ComponentName(context, this.getClass());
+            PackageManager pm = context.getPackageManager();
+            pm.setComponentEnabledSetting(receiver,
+                    PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+                    PackageManager.DONT_KILL_APP);
+            Toast.makeText(context, "Disabled broadcst receiver", Toast.LENGTH_SHORT).show();
+            Log.d("Disabled broadcst receiver", "Disabled broadcst receiver");
+
         }
-
-
-
     }
 
 }

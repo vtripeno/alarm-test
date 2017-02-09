@@ -1,5 +1,6 @@
 package com.treinamento.victortripeno.testalarm;
 
+import android.app.ActivityManager;
 import android.app.AlarmManager;
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -104,6 +105,9 @@ public class AlarmActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 try {
+                    if(!AlarmActivity.this.stopService(msgIntent)) {
+                        AlarmActivity.this.startActivity(msgIntent);
+                    }
                     AlarmDAO alarmeDao = new AlarmDAO(AlarmActivity.this);
                     Alarme alarme = new Alarme();
                     Calendar calendario = Calendar.getInstance();
@@ -218,6 +222,17 @@ public class AlarmActivity extends AppCompatActivity {
         alarmeDao.close();
         AlarmAdapter alarmAdapter = new AlarmAdapter(alarmes, AlarmActivity.this);
         listaHorarios.setAdapter(alarmAdapter);
+    }
+
+    private boolean isServiceRunning(String caminhoServico) {
+        ActivityManager manager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)){
+            Log.d("Serviço", service.service.getClassName());
+            if(caminhoServico.equals(service.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }
