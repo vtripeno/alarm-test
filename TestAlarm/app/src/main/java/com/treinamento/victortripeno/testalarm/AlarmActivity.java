@@ -113,7 +113,7 @@ public class AlarmActivity extends AppCompatActivity {
                 try {
                     if(!AlarmActivity.this.stopService(msgIntent)) {
                         enableBroadcastReceiver();
-                        AlarmActivity.this.startActivity(msgIntent);
+                        AlarmActivity.this.startService(msgIntent);
                     }
                     AlarmDAO alarmeDao = new AlarmDAO(AlarmActivity.this);
                     Alarme alarme = new Alarme();
