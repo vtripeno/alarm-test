@@ -5,7 +5,9 @@ import android.app.AlarmManager;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.ComponentName;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
@@ -17,6 +19,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.google.android.gms.appindexing.Action;
@@ -25,6 +28,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.treinamento.victortripeno.testalarm.adapter.AlarmAdapter;
 import com.treinamento.victortripeno.testalarm.dao.AlarmDAO;
 import com.treinamento.victortripeno.testalarm.modelo.Alarme;
+import com.treinamento.victortripeno.testalarm.receiver.AlarmBroadcast;
 import com.treinamento.victortripeno.testalarm.receiver.AlarmReceiver;
 import com.treinamento.victortripeno.testalarm.service.ServicoAlarme;
 
@@ -91,6 +95,8 @@ public class AlarmActivity extends AppCompatActivity {
         btnCamera = (Button) findViewById(R.id.btn_camera);
         btnDesenho = (Button) findViewById(R.id.btn_desenho);
 
+        // Iniciar o Broadcast caso o mesmo se esteja parado
+        enableBroadcastReceiver();
 
         msgIntent = new Intent(this, ServicoAlarme.class);
         msgIntent.putExtra(ServicoAlarme.ALARM_SERVICE, "TESTE");
@@ -106,6 +112,7 @@ public class AlarmActivity extends AppCompatActivity {
             public void onClick(View view) {
                 try {
                     if(!AlarmActivity.this.stopService(msgIntent)) {
+                        enableBroadcastReceiver();
                         AlarmActivity.this.startActivity(msgIntent);
                     }
                     AlarmDAO alarmeDao = new AlarmDAO(AlarmActivity.this);
@@ -233,6 +240,19 @@ public class AlarmActivity extends AppCompatActivity {
             }
         }
         return false;
+    }
+
+    /**
+     * Método responsável por ativar o Broadcast
+     */
+    public void enableBroadcastReceiver() {
+        ComponentName receiver = new ComponentName(this, AlarmBroadcast.class);
+        PackageManager pm = this.getPackageManager();
+
+        pm.setComponentEnabledSetting(receiver,
+                PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
+                PackageManager.DONT_KILL_APP);
+        Toast.makeText(this, "Enabled broadcast receiver", Toast.LENGTH_SHORT).show();
     }
 
 }
